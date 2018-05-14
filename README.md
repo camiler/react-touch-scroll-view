@@ -1,3 +1,5 @@
+已迁移到[react-components touchscroll](https://github.com/camiler/react-components/tree/master/src/components/touchScroll)
+
 ## 滑动上拉加载组件
 
 基于[alloyTouch](https://github.com/AlloyTeam/AlloyTouch)和[transfrom](https://github.com/AlloyTeam/AlloyTouch/tree/master/transformjs)的react滑动组件。目前有两种用法：   
