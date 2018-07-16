@@ -1,15 +1,15 @@
 {
   "name": "react-touch-scroll-view",
-  "version": "1.0.3",
-  "description": "",
-  "main": "build/js/index.js",
+  "version": "1.0.4",
+  "description": "react-touch-scroll-view",
+  "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=development && webpack-dev-server --mode development --progress --colors --hot --inline",
-    "build": "cross-env NODE_ENV=production && webpack --mode production",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --progress --colors --hot --inline",
+    "build": "cross-env NODE_ENV=production webpack --mode production",
     "prepublish": "npm run build"
   },
-  "keywords": [],
+  "keywords": ["touch scroll with react", "alloytouch", "react scroll"],
   "author": "camiler",
   "repository": {
     "type": "git",

@@ -11,7 +11,18 @@ const entry = process.env.NODE_ENV === 'production' ? {
     index: './src/index.js',
     demo: './demo/index.js'
   };
+console.log(process.env.NODE_ENV)
+const output = process.env.NODE_ENV === 'production' ? {
+  path: path.resolve(__dirname, "build"),
+  filename: "index.js",
+  library: 'TouchScroll',
+  libraryTarget: 'umd'
+} : {
+  path: path.resolve(__dirname, "build"),
+  filename: "js/[name].js"
+};
 
+console.log(output);
 const plugins = (function () {
   return ['demo'].map(item => {
     return new HtmlWebPackPlugin({
@@ -25,9 +36,10 @@ const plugins = (function () {
 
 module.exports = {
   entry,
-  output: {
-    path: path.resolve(__dirname, "build"),
-    filename: "js/[name].js"
+  output,
+  externals: {
+    'react': 'umd react',
+    'react-dom': 'umd react-dom'
   },
   module: {
     rules: [
