@@ -32,6 +32,9 @@ class TouchScroll extends Component {
     this.touchRef = React.createRef();
     this.refreshRef = React.createRef();
     this.scrollerRef = React.createRef();
+    this.preventTouchMove = this.preventTouchMove.bind(this);
+    this.touchMove = this.touchMove.bind(this);
+    this.touchEnd = this.touchEnd.bind(this);
   }
 
   componentDidMount() {
@@ -76,13 +79,11 @@ class TouchScroll extends Component {
     document.removeEventListener('touchmove', this.preventTouchMove, false);
   }
 
-  preventTouchMove = (evt) => {
-    if (evt && evt.preventDefault) {
-      evt.preventDefault();
-    }
+  preventTouchMove(evt) {
+    evt && evt.preventDefault();
   }
 
-  initAlloy = () => {
+  initAlloy() {
     const {changeCb, isPullUp, isPullDown} = this.props;
     if (isPullDown) {
       transform(this.refreshRef.current);
@@ -100,16 +101,16 @@ class TouchScroll extends Component {
       outFactor: 0.1,
       inertia: true,
       spring: true,
-      touchStart: () => {
+      touchStart: function () {
         this.resetMin();
         if (isPullDown) {
           this.setState({downState: 'waiting'});
         }
-      },
+      }.bind(this),
       lockDirection: false,
-      change: (v) => {
+      change: function(v) {
         changeCb && changeCb(v);
-      },
+      }.bind(this),
     }
     const otherConfig = isPullUp || isPullDown ? {
       touchMove: this.touchMove, 
@@ -118,7 +119,7 @@ class TouchScroll extends Component {
     this.scroll = new AlloyTouch(Object.assign({}, config, otherConfig));
   }
 
-  touchMove = (evt, v) => {
+  touchMove(evt, v) {
     const {hasMore, curState, downState} = this.state;
     const {isPullUp, isPullDown, pdSize} = this.props;
     if (hasMore) {
@@ -136,16 +137,16 @@ class TouchScroll extends Component {
     }
   }
 
-  touchEnd = (evt, v) => {
+  touchEnd(evt, v) {
     const {hasMore, curState, downState} = this.state;
     const {loadMore, isPullUp, isPullDown, refresh} = this.props;
     if (isPullUp) {
       if (hasMore) {
         if (!this.hadLoad && v < this.scroll.min && curState !== 'loading') {
           this.setState({curState: 'loading'});
-          loadMore && loadMore(v, () => {
+          loadMore && loadMore(v, function () {
             this.setState({curState: 'waiting'});
-          });
+          }.bind(this));
           this.hadLoad = true;
         } 
       } else {
@@ -160,7 +161,7 @@ class TouchScroll extends Component {
     }
   }
 
-  resetMin = () => {
+  resetMin() {
     const {otherHeight} = this.props;
     const initMin = 0 - (parseInt(this.touchRef.current.scrollHeight) - window.innerHeight + otherHeight);
     this.scroll.min = initMin > 0 ? 0 : initMin;
