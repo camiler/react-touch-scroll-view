@@ -9,7 +9,11 @@
     "build": "cross-env NODE_ENV=production && webpack --mode production"
   },
   "keywords": [],
-  "author": "",
+  "author": "camiler",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/camiler/react-touch-scroll-view.git"
+  },
   "engines": {
     "node": ">=8.9.3"
   },
