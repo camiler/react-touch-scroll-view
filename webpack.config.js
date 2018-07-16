@@ -8,7 +8,7 @@ const entry = process.env.NODE_ENV === 'production' ? {
       'react',
       'react-dom'
     ],
-    touchScroll: './src/index.js',
+    index: './src/index.js',
     demo: './demo/index.js'
   };
 
@@ -26,11 +26,8 @@ const plugins = (function () {
 module.exports = {
   entry,
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "build"),
     filename: "js/[name].js"
-  },
-  devServer: {
-    contentBase: "./dist"
   },
   module: {
     rules: [
