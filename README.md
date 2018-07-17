@@ -1,6 +1,6 @@
 ## react-touch-scroll-view
 
-基于[alloyTouch](https://github.com/AlloyTeam/AlloyTouch)和[transfrom](https://github.com/AlloyTeam/AlloyTouch/tree/master/transformjs)的react滑动组件。目前有两种用法：   
+基于[alloyTouch](https://github.com/AlloyTeam/AlloyTouch)和[transfrom](https://github.com/AlloyTeam/AlloyTouch/tree/master/transformjs)的react滑动组件。支持上拉加载、下拉刷新。用于移动端页面列表加载。
 
 ## Installation
 `npm install --save react-touch-scroll-view`
