@@ -1,7 +1,11 @@
-## 滑动上拉加载组件
+## react-touch-scroll-view
 
 基于[alloyTouch](https://github.com/AlloyTeam/AlloyTouch)和[transfrom](https://github.com/AlloyTeam/AlloyTouch/tree/master/transformjs)的react滑动组件。目前有两种用法：   
 
+## Installation
+`npm install --save react-touch-scroll-view`
+
+## How to use
 ### 单纯上滑滚动
 ```
 <TouchScroll 
@@ -44,7 +48,7 @@
 
 4. 上滑的关键在于min值的缺点，所以对于otherHeight的值一定要计算正确。如果是整个视口页面的滑动，那么就不需要设置这个值了。比方说：页面视口底部有个fix的60px高度的按钮，而滚动元素就是除这个按钮的高度内可见，那么这个值就设置为60。 
 
-### demo
+## demo
 
 clone仓库，npm install && npm run start， 浏览器访问localhost:8080/demo
 

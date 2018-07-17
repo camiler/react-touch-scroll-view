@@ -11,7 +11,7 @@ const entry = process.env.NODE_ENV === 'production' ? {
     index: './src/index.js',
     demo: './demo/index.js'
   };
-console.log(process.env.NODE_ENV)
+
 const output = process.env.NODE_ENV === 'production' ? {
   path: path.resolve(__dirname, "build"),
   filename: "index.js",
@@ -22,25 +22,9 @@ const output = process.env.NODE_ENV === 'production' ? {
   filename: "js/[name].js"
 };
 
-console.log(output);
-const plugins = (function () {
-  return ['demo'].map(item => {
-    return new HtmlWebPackPlugin({
-      filename: item,
-      template: './template/index.hbs',
-      chunks: ['vendor', item],
-      inject: true
-    });
-  })
-})();
-
-module.exports = {
+const config = {
   entry,
   output,
-  externals: {
-    'react': 'umd react',
-    'react-dom': 'umd react-dom'
-  },
   module: {
     rules: [
       {
@@ -87,6 +71,25 @@ module.exports = {
         }
       },
     ]
-  },
-  plugins
+  }
 };
+if (process.env.NODE_ENV === 'development') {
+  config.plugins = (function () {
+    return ['demo'].map(item => {
+      return new HtmlWebPackPlugin({
+        filename: item,
+        template: './template/index.hbs',
+        chunks: ['vendor', item],
+        inject: true
+      });
+    })
+  })();
+}
+
+if (process.env.NODE_ENV === 'production') {
+  config.externals = {
+    'react': 'umd react',
+    'react-dom': 'umd react-dom'
+  }
+}
+module.exports = config;
